@@ -1,9 +1,6 @@
 require "debugger"
 require 'net/http'
 
-#dname = "www.51idc.com"
-#dname = "www.51idc.com"
-#dname = "www.doosolar.com"
 dname = "www.sina.com.cn"
 
 uri = URI("http://#{dname}")

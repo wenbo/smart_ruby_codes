@@ -11,7 +11,18 @@ def fetch_links(dname,path)
     res = http.request request
     str_body = res.body                                 # proper argument
     #puts str_body                                     #  for 'path'
-    mixed_links = str_body.scan(/href="[^(http|\.\.|#)].*?"/)    #
+    relative_links = str_body.scan(/href="[^(http|\.\.|#)].*?"/)  
+    relative_links_path = relative_links.collect do |relative_link|
+      relative_link.delete("\"")[5..-1]
+    end
+
+    abs_links = str_body.scan(/href="http.*?"/).select do |href|
+      href.include? dname
+    end
+    abs_links_path = abs_links.collect do |abs_href|
+      URI(abs_href.delete("\"")[5..-1]).path
+    end
+    mixed_links = (relative_links_path + abs_links_path).uniq
       #puts mixed_links 
       mixed_links.each do |k|
       tmp = k.delete("\"")[5..-1]
