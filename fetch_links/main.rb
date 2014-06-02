@@ -22,10 +22,12 @@ def fetch_links(dname,path)
     abs_links_path = abs_links.collect do |abs_href|
       URI(abs_href.delete("\"")[5..-1]).path
     end
+    #abs_links_path = []
     mixed_links = (relative_links_path + abs_links_path).uniq
       #puts mixed_links 
       mixed_links.each do |k|
-      tmp = k.delete("\"")[5..-1]
+      tmp = k  #.delete("\"")[5..-1]
+      #debugger
       if path == '/'
         @arr_links << tmp
       else
@@ -50,7 +52,7 @@ def traverse(dname)
       begin 
         fetch_links(dname,link)
         @arr_links.delete(link)    # remove the link that having been traversed
-      rescue
+      rescue 
         @arr_links.delete(link)    # remove the link that having been traversed
       end
     end
@@ -72,6 +74,7 @@ def search(dname)
 end
 
 #search('www.51idc.com')
+search("www.doosolar.com")
 #search('www.sina.com.cn')
-search('glico.com.cn')
+#search('glico.com.cn')
 #search('sh.58.com')
