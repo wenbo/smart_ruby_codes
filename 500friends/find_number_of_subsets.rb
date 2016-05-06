@@ -1,4 +1,4 @@
-TARGET_SUM = 15
+@target_sum = 15
 
 @stack = []
 
@@ -6,12 +6,12 @@ TARGET_SUM = 15
 
 def populateSubset(data, fromIndex, endIndex)
 
-  if (@sumInStack == TARGET_SUM)
+  if (@sumInStack == @target_sum)
     print_stack
   end
 
   for currentIndex in fromIndex..endIndex do
-    if (@sumInStack + data[currentIndex] <= TARGET_SUM)
+    if (@sumInStack + data[currentIndex] <= @target_sum)
       @stack << data[currentIndex]
       @sumInStack += data[currentIndex]
 
@@ -24,7 +24,7 @@ end
 
 def print_stack
   str = ""
-  str = str + TARGET_SUM.to_s + " = "
+  str = str + @target_sum.to_s + " = "
   @stack.each do |i|
     str = str + i.to_s + "+"
   end
